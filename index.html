@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Home</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Home</h1>
+
+    
+
+
+
+    
+
+
+    <h3> </h3>
+
+
+
+
+
+
+
+
+
+
+    
+
+
+
+
+    <section>
+        <article><h1>Bloom-Filters</h1><p><a href="https://travis-ci.org/Callidon/bloom-filters"><img src="https://travis-ci.org/Callidon/bloom-filters.svg?branch=master" alt="Build Status"></a> <a href="https://coveralls.io/github/Callidon/bloom-filters?branch=master"><img src="https://coveralls.io/repos/github/Callidon/bloom-filters/badge.svg?branch=master" alt="Coverage Status"></a></p>
+<p><strong>Keywords:</strong> bloom, filter, bloom filter, probabilistic, datastructure</p>
+<p>JS implementation of probabilistic data structures: Bloom Filter (and its derived), HyperLogLog, Count-Min Sketch, Top-K and MinHash</p>
+<h1>Table of contents</h1><ul>
+<li><a href="#installation">Installation</a></li>
+<li><a href="#data-structures">Data structures</a><ul>
+<li><a href="#classic-bloom-filter">Classic Bloom Filter</a></li>
+<li><a href="#cuckoo-filter">Cuckoo Filter</a></li>
+<li><a href="#count-min-sketch">Count Min Sketch</a></li>
+</ul>
+</li>
+<li><a href="#tests">Tests</a></li>
+<li><a href="#documentation">Documentation</a></li>
+<li><a href="#references">References</a></li>
+<li><a href="#license">License</a></li>
+</ul>
+<h2>Installation</h2><pre class="prettyprint source lang-bash"><code>  npm install bloom-filters --save</code></pre><h2>Data structures</h2><h3>Classic Bloom Filter</h3><pre class="prettyprint source lang-javascript"><code>const BloomFilter = require('bloom-filters').BloomFilter;
+
+// create a Bloom Filter with size = 15 and 1% error rate
+let filter = new BloomFilter(15, 0.1);
+
+// alternatively, create a Bloom Filter from an array with 1% error rate
+filter = BloomFilter.from([ 'alice', 'bob' ], 0.1);
+
+// add some value in the filter
+filter.add('alice');
+filter.add('bob');
+
+// lookup for some data
+console.log(filter.has('bob')); // output: true
+console.log(filter.has('daniel')); // output: false
+
+// print false positive rate (around 0.1)
+console.log(filter.rate());</code></pre><h2>Cuckoo Filter</h2><pre class="prettyprint source lang-javascript"><code>const CuckooFilter = require('bloom-filters').CuckooFilter;
+
+// create a Cuckoo Filter with size = 15, fingerprint length = 3 and bucket size = 2
+let filter = new CuckooFilter(15, 3, 2);
+filter.add('alice');
+filter.add('bob');
+
+// lookup for some data
+console.log(filter.has('bob')); // output: true
+console.log(filter.has('daniel')); // output: false
+
+// remove something
+filter.remove('bob');
+console.log(filter.has('bob')); // output: false</code></pre><h3>Count Min Sketch</h3><pre class="prettyprint source lang-javascript"><code>const CountMinSketch = require('bloom-filters').CountMinSketch;
+
+// create a new count min sketch with epsilon = 0.001 and delta = 0.99
+const sketch = new CountMinSketch(0.001, 0.99);
+
+// push some occurrences in the sketch
+sketch.update('alice');
+sketch.update('alice');
+sketch.update('bob');
+
+// count occurrences
+console.log(sketch.count('alice')); // output: 2
+console.log(sketch.count('bob')); // output: 1
+console.log(sketch.count('daniel')); // output: 0</code></pre><h2>Tests</h2><p>Running with Mocha + Chai</p>
+<pre class="prettyprint source lang-bash"><code># run tests
+npm test
+
+# generate coverage with istanbul
+npm run coverage</code></pre><h1>Documentation</h1><p>Generate JSDoc in directory <code>doc/</code></p>
+<pre class="prettyprint source"><code>npm run doc</code></pre><h2>References</h2><ul>
+<li><a href="http://crystal.uta.edu/~mcguigan/cse6350/papers/Bloom.pdf">Classic Bloom Filter</a>: Bloom, B. H. (1970). Space/time trade-offs in hash coding with allowable errors. Communications of the ACM, 13(7), 422-426.</li>
+<li><a href="https://www.cs.cmu.edu/~dga/papers/cuckoo-conext2014.pdf">Cuckoo Filter</a>: Fan, B., Andersen, D. G., Kaminsky, M., &amp; Mitzenmacher, M. D. (2014, December). Cuckoo filter: Practically better than bloom. In Proceedings of the 10th ACM International on Conference on emerging Networking Experiments and Technologies (pp. 75-88). ACM.</li>
+<li><a href="https://www.usenix.org/legacy/events/hotsec10/tech/full_papers/Schechter.pdf">Count Min Sketch</a>: Schechter, S., Herley, C., &amp; Mitzenmacher, M. (2010, August). Popularity is everything: A new approach to protecting passwords from statistical-guessing attacks. In Proceedings of the 5th USENIX conference on Hot topics in security (pp. 1-8). USENIX Association.</li>
+</ul>
+<h2>License</h2><p><a href="https://github.com/Callidon/bloom-filters/blob/master/LICENSE">MIT License</a></p></article>
+    </section>
+
+
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="BloomFilter.html">BloomFilter</a></li><li><a href="CountMinSketch.html">CountMinSketch</a></li><li><a href="CuckooFilter.html">CuckooFilter</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.3</a> on Fri Feb 24 2017 12:37:48 GMT+0000 (UTC)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>
