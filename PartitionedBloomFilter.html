@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Class: BloomFilter</title>
+    <title>JSDoc: Class: PartitionedBloomFilter</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Class: BloomFilter</h1>
+    <h1 class="page-title">Class: PartitionedBloomFilter</h1>
 
     
 
@@ -28,11 +28,14 @@
 
 <header>
     
-        <h2>BloomFilter</h2>
+        <h2>PartitionedBloomFilter</h2>
         
-            <div class="class-description"><p>A Bloom filter is a space-efficient probabilistic data structure, conceived by Burton Howard Bloom in 1970,
-that is used to test whether an element is a member of a set. False positive matches are possible, but false negatives are not.</p>
-<p>Reference: Bloom, B. H. (1970). Space/time trade-offs in hash coding with allowable errors. Communications of the ACM, 13(7), 422-426.</p></div>
+            <div class="class-description"><p>A Partitioned Bloom Filter is a variation of a classic Bloom filter.</p>
+<p>This filter works by partitioning the M-sized bit array into k slices of size m = M/k bits, k = nb of hash functions in the filter.
+Each hash function produces an index over m for its respective slice.
+Thus, each element is described by exactly k bits, meaning the distribution of false positives is uniform across all elements.</p>
+<p>Be careful, as a Partitioned Bloom Filter have much higher collison rosks that a classic Bloom Filter on small sets of data.</p>
+<p>Reference: Chang, F., Feng, W. C., &amp; Li, K. (2004, March). Approximate caches for packet classification. In INFOCOM 2004. Twenty-third AnnualJoint Conference of the IEEE Computer and Communications Societies (Vol. 4, pp. 2196-2207). IEEE.</p></div>
         
     
 </header>
@@ -46,7 +49,7 @@ that is used to test whether an element is a member of a set. False positive mat
     <h2>Constructor</h2>
     
 
-    <h4 class="name" id="BloomFilter"><span class="type-signature"></span>new BloomFilter<span class="signature">(capacity, errorRate)</span><span class="type-signature"></span></h4>
+    <h4 class="name" id="PartitionedBloomFilter"><span class="type-signature"></span>new PartitionedBloomFilter<span class="signature">(capacity, errorRate)</span><span class="type-signature"></span></h4>
 
     
 
@@ -176,7 +179,7 @@ that is used to test whether an element is a member of a set. False positive mat
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="bloom-filter.js.html">bloom-filter.js</a>, <a href="bloom-filter.js.html#line57">line 57</a>
+        <a href="partitioned-bloom-filter.js.html">partitioned-bloom-filter.js</a>, <a href="partitioned-bloom-filter.js.html#line62">line 62</a>
     </li></ul></dd>
     
 
@@ -186,7 +189,7 @@ that is used to test whether an element is a member of a set. False positive mat
     <dt class="tag-see">See:</dt>
     <dd class="tag-see">
         <ul>
-            <li><a href="http://crystal.uta.edu/~mcguigan/cse6350/papers/Bloom.pdf">http://crystal.uta.edu/~mcguigan/cse6350/papers/Bloom.pdf</a> for more details about classic Bloom Filters.</li>
+            <li><a href="https://pdfs.semanticscholar.org/0e18/e24b37a1f4196fddf8c9ff8e4368b74cfd88.pdf">https://pdfs.semanticscholar.org/0e18/e24b37a1f4196fddf8c9ff8e4368b74cfd88.pdf</a> for more details about Partitioned Bloom Filters</li>
         </ul>
     </dd>
     
@@ -210,13 +213,13 @@ that is used to test whether an element is a member of a set. False positive mat
 
     <h5>Example</h5>
     
-    <pre class="prettyprint"><code>const BloomFilter = require('bloom-filters').BloomFilter;
+    <pre class="prettyprint"><code>const PartitionedBloomFilter = require('bloom-filters').PartitionedBloomFilter;
 
-// create a Bloom Filter with capacity = 15 and 1% error rate
-let filter = new BloomFilter(15, 0.1);
+// create a Partitioned Bloom Filter with capacity = 15 and 1% error rate
+let filter = new PartitionedBloomFilter(15, 0.1);
 
-// alternatively, create a Bloom Filter from an array with 1% error rate
-filter = BloomFilter.from([ 'alice', 'bob' ], 0.1);
+// alternatively, create a Partitioned Bloom Filter from an array with 1% error rate
+filter = PartitionedBloomFilter.from([ 'alice', 'bob' ], 0.1);
 
 // add some value in the filter
 filter.add('alice');
@@ -261,7 +264,7 @@ console.log(filter.rate());</code></pre>
 
 
 <div class="description">
-    <p>Build a new Bloom Filter from an existing array with a fixed error rate</p>
+    <p>Build a new Partitioned Bloom Filter from an existing array with a fixed error rate</p>
 </div>
 
 
@@ -377,7 +380,7 @@ console.log(filter.rate());</code></pre>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="bloom-filter.js.html">bloom-filter.js</a>, <a href="bloom-filter.js.html#line79">line 79</a>
+        <a href="partitioned-bloom-filter.js.html">partitioned-bloom-filter.js</a>, <a href="partitioned-bloom-filter.js.html#line85">line 85</a>
     </li></ul></dd>
     
 
@@ -427,7 +430,7 @@ console.log(filter.rate());</code></pre>
     <h5>Example</h5>
     
     <pre class="prettyprint"><code>// create a filter with a false positive rate of 0.1
-const filter = BloomFilter.from(['alice', 'bob', 'carl'], 0.1);</code></pre>
+const filter = PartitionedBloomFilter.from(['alice', 'bob', 'carl'], 0.1);</code></pre>
 
 
 
@@ -536,7 +539,7 @@ const filter = BloomFilter.from(['alice', 'bob', 'carl'], 0.1);</code></pre>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="bloom-filter.js.html">bloom-filter.js</a>, <a href="bloom-filter.js.html#line93">line 93</a>
+        <a href="partitioned-bloom-filter.js.html">partitioned-bloom-filter.js</a>, <a href="partitioned-bloom-filter.js.html#line99">line 99</a>
     </li></ul></dd>
     
 
@@ -581,7 +584,7 @@ const filter = BloomFilter.from(['alice', 'bob', 'carl'], 0.1);</code></pre>
 
     <h5>Example</h5>
     
-    <pre class="prettyprint"><code>const filter = new BloomFilter(15, 0.1);
+    <pre class="prettyprint"><code>const filter = new PartitionedBloomFilter(15, 0.1);
 filter.add('foo');</code></pre>
 
 
@@ -691,7 +694,7 @@ filter.add('foo');</code></pre>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="bloom-filter.js.html">bloom-filter.js</a>, <a href="bloom-filter.js.html#line112">line 112</a>
+        <a href="partitioned-bloom-filter.js.html">partitioned-bloom-filter.js</a>, <a href="partitioned-bloom-filter.js.html#line118">line 118</a>
     </li></ul></dd>
     
 
@@ -740,7 +743,7 @@ filter.add('foo');</code></pre>
 
     <h5>Example</h5>
     
-    <pre class="prettyprint"><code>const filter = new BloomFilter(15, 0.1);
+    <pre class="prettyprint"><code>const filter = new PartitionedBloomFilter(15, 0.1);
 filter.add('foo');
 console.log(filter.has('foo')); // output: true
 console.log(filter.has('bar')); // output: false</code></pre>
@@ -803,7 +806,7 @@ console.log(filter.has('bar')); // output: false</code></pre>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="bloom-filter.js.html">bloom-filter.js</a>, <a href="bloom-filter.js.html#line130">line 130</a>
+        <a href="partitioned-bloom-filter.js.html">partitioned-bloom-filter.js</a>, <a href="partitioned-bloom-filter.js.html#line136">line 136</a>
     </li></ul></dd>
     
 
@@ -852,7 +855,7 @@ console.log(filter.has('bar')); // output: false</code></pre>
 
     <h5>Example</h5>
     
-    <pre class="prettyprint"><code>const filter = new BloomFilter(15, 0.1);
+    <pre class="prettyprint"><code>const filter = new PartitionedBloomFilter(15, 0.1);
 console.log(filter.rate()); // output: something around 0.1</code></pre>
 
 
