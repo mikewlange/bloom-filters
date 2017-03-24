@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Source: formulas.js</title>
+    <title>JSDoc: Source: exportable.js</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Source: formulas.js</h1>
+    <h1 class="page-title">Source: exportable.js</h1>
 
     
 
@@ -26,7 +26,7 @@
     
     <section>
         <article>
-            <pre class="prettyprint source linenums"><code>/* file : formulas.js
+            <pre class="prettyprint source linenums"><code>/* file : exportable.js
 MIT License
 
 Copyright (c) 2016 Thomas Minier &amp; Arnaud Grall
@@ -53,38 +53,63 @@ SOFTWARE.
 'use strict';
 
 /**
- * Various formulas used with Bloom Filters
- * @namespace Formulas
- * @private
+ * An Exportable is a class that can be exported into a JSON object
+ * @abstract
+ * @author Thomas Minier
  */
+class Exportable {
+  /**
+   * Constructor
+   * @param  {string} type  - The type of this exportable
+   * @param  {string[]} fields - The fields to exports as JSON
+   */
+  constructor (type, ...fields) {
+    this.type = type;
+    this.fields = fields;
+    this.resolvers = new Map();
+    this.resolvers.set('_default', v => {
+      if (Array.isArray(v)) {
+        return v.slice(0);
+      } else if (typeof v === 'object') {
+        return Object.assign({}, v);
+      }
+      return v;
+    });
+  }
 
- /**
- * Compute the optimal size of a Bloom Filter
- * @param  {int} setLength - The length of the dataset used to fill the filter
- * @param  {number} errorRate - The targeted false positive rate
- * @return {int} The optimal size of a Bloom Filter
- * @memberof Formulas
- */
-const optimalFilterSize = (setLength, errorRate) => {
-  return Math.ceil(-((setLength * Math.log(errorRate)) / Math.pow(Math.log(2), 2)));
-};
+  /**
+   * Register a resolver used to resolve the export of a field
+   * @param  {string} field    - The name of the field associated to this resolver
+   * @param  {function} resolver - The resolver used to export the field
+   * @return {void}
+   * @private
+   */
+  _registerResolver (field, resolver) {
+    this.resolvers.set(field, resolver);
+  }
 
-/**
- * Compute the optimal number of hash functions to be used by a Bloom Filter
- * @param  {int} size - The size of the filter
- * @param  {int} setLength - The length of the dataset used to fill the filter
- * @return {int} The optimal number of hash functions to be used by a Bloom Filter
- * @memberof Formulas
- */
-const optimalHashes = (size, setLength) => {
-  return Math.ceil((size / setLength) * Math.log(2));
-};
+  /**
+   * Save as a JSON object
+   * @return {Object} The exported JSON object
+   */
+  saveAsJSON () {
+    let value;
+    const json = { type: this.type };
+    this.fields.forEach(fieldName => {
+      if (fieldName in this) {
+        value = this[fieldName];
+        if (this.resolvers.has(fieldName)) {
+          json[fieldName] = this.resolvers.get(fieldName)(value);
+        } else {
+          json[fieldName] = this.resolvers.get('_default')(value);
+        }
+      }
+    });
+    return json;
+  }
+}
 
-
-module.exports = {
-  optimalFilterSize,
-  optimalHashes
-};
+module.exports = Exportable;
 </code></pre>
         </article>
     </section>
