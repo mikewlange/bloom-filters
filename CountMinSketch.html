@@ -250,6 +250,159 @@ console.log(sketch.count('daniel')); // output: 0</code></pre>
 
     
 
+    <h4 class="name" id=".fromJSON"><span class="type-signature">(static) </span>fromJSON<span class="signature">(json)</span><span class="type-signature"> &rarr; {<a href="CountMinSketch.html">CountMinSketch</a>}</span></h4>
+
+    
+
+
+
+<div class="description">
+    <p>Create a new Count-Min Sketch from a JSON export</p>
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>json</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>A JSON export of a Count-Min Sketch</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="count-min-sketch.js.html">count-min-sketch.js</a>, <a href="count-min-sketch.js.html#line71">line 71</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>A new Count-Min Sketch</p>
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type"><a href="CountMinSketch.html">CountMinSketch</a></span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+        
+            
+
+    
+
     <h4 class="name" id="clone"><span class="type-signature"></span>clone<span class="signature">()</span><span class="type-signature"> &rarr; {<a href="CountMinSketch.html">CountMinSketch</a>}</span></h4>
 
     
@@ -301,7 +454,7 @@ console.log(sketch.count('daniel')); // output: 0</code></pre>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="count-min-sketch.js.html">count-min-sketch.js</a>, <a href="count-min-sketch.js.html#line145">line 145</a>
+        <a href="count-min-sketch.js.html">count-min-sketch.js</a>, <a href="count-min-sketch.js.html#line158">line 158</a>
     </li></ul></dd>
     
 
@@ -463,7 +616,7 @@ console.log(clone.count('foo')); // output: 1</code></pre>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="count-min-sketch.js.html">count-min-sketch.js</a>, <a href="count-min-sketch.js.html#line94">line 94</a>
+        <a href="count-min-sketch.js.html">count-min-sketch.js</a>, <a href="count-min-sketch.js.html#line107">line 107</a>
     </li></ul></dd>
     
 
@@ -626,7 +779,7 @@ console.log(sketch.count('bar')); // output: 0</code></pre>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="count-min-sketch.js.html">count-min-sketch.js</a>, <a href="count-min-sketch.js.html#line124">line 124</a>
+        <a href="count-min-sketch.js.html">count-min-sketch.js</a>, <a href="count-min-sketch.js.html#line137">line 137</a>
     </li></ul></dd>
     
 
@@ -694,6 +847,110 @@ otherSketch.update('bar');
 sketch.merge(otherSketch);
 console.log(sketch.count('foo')); // output: 2
 console.log(sketch.count('bar')); // output: 1</code></pre>
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="saveAsJSON"><span class="type-signature"></span>saveAsJSON<span class="signature">()</span><span class="type-signature"> &rarr; {Object}</span></h4>
+
+    
+
+
+
+<div class="description">
+    <p>Export a Count-Min Sketch as a JSON object</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="count-min-sketch.js.html">count-min-sketch.js</a>, <a href="count-min-sketch.js.html#line168">line 168</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>The exported Count-Min Sketch as a JSON object</p>
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Object</span>
+
+
+    </dd>
+</dl>
+
+    
 
 
 
@@ -802,7 +1059,7 @@ console.log(sketch.count('bar')); // output: 1</code></pre>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="count-min-sketch.js.html">count-min-sketch.js</a>, <a href="count-min-sketch.js.html#line74">line 74</a>
+        <a href="count-min-sketch.js.html">count-min-sketch.js</a>, <a href="count-min-sketch.js.html#line87">line 87</a>
     </li></ul></dd>
     
 
@@ -874,7 +1131,7 @@ sketch.update('foo');</code></pre>
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.3</a> on Fri Mar 24 2017 09:23:13 GMT+0000 (UTC)
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.3</a> on Fri Mar 24 2017 09:44:53 GMT+0000 (UTC)
 </footer>
 
 <script> prettyPrint(); </script>
