@@ -179,7 +179,7 @@ Thus, each element is described by exactly k bits, meaning the distribution of f
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="partitioned-bloom-filter.js.html">partitioned-bloom-filter.js</a>, <a href="partitioned-bloom-filter.js.html#line62">line 62</a>
+        <a href="partitioned-bloom-filter.js.html">partitioned-bloom-filter.js</a>, <a href="partitioned-bloom-filter.js.html#line64">line 64</a>
     </li></ul></dd>
     
 
@@ -236,6 +236,17 @@ console.log(filter.rate());</code></pre>
 
     
     </div>
+
+    
+        <h3 class="subsection-title">Extends</h3>
+
+        
+
+
+    <ul>
+        <li><a href="Exportable.html">Exportable</a></li>
+    </ul>
+
 
     
 
@@ -380,7 +391,7 @@ console.log(filter.rate());</code></pre>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="partitioned-bloom-filter.js.html">partitioned-bloom-filter.js</a>, <a href="partitioned-bloom-filter.js.html#line85">line 85</a>
+        <a href="partitioned-bloom-filter.js.html">partitioned-bloom-filter.js</a>, <a href="partitioned-bloom-filter.js.html#line90">line 90</a>
     </li></ul></dd>
     
 
@@ -431,6 +442,159 @@ console.log(filter.rate());</code></pre>
     
     <pre class="prettyprint"><code>// create a filter with a false positive rate of 0.1
 const filter = PartitionedBloomFilter.from(['alice', 'bob', 'carl'], 0.1);</code></pre>
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id=".fromJSON"><span class="type-signature">(static) </span>fromJSON<span class="signature">(json)</span><span class="type-signature"> &rarr; {<a href="PartitionedBloomFilter.html">PartitionedBloomFilter</a>}</span></h4>
+
+    
+
+
+
+<div class="description">
+    <p>Create a new Partitioned Bloom Filter from a JSON export</p>
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>json</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>A JSON export of a Partitioned Bloom Filter</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="partitioned-bloom-filter.js.html">partitioned-bloom-filter.js</a>, <a href="partitioned-bloom-filter.js.html#line101">line 101</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>A new Partitioned Bloom Filter</p>
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type"><a href="PartitionedBloomFilter.html">PartitionedBloomFilter</a></span>
+
+
+    </dd>
+</dl>
+
+    
 
 
 
@@ -539,7 +703,7 @@ const filter = PartitionedBloomFilter.from(['alice', 'bob', 'carl'], 0.1);</code
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="partitioned-bloom-filter.js.html">partitioned-bloom-filter.js</a>, <a href="partitioned-bloom-filter.js.html#line99">line 99</a>
+        <a href="partitioned-bloom-filter.js.html">partitioned-bloom-filter.js</a>, <a href="partitioned-bloom-filter.js.html#line118">line 118</a>
     </li></ul></dd>
     
 
@@ -694,7 +858,7 @@ filter.add('foo');</code></pre>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="partitioned-bloom-filter.js.html">partitioned-bloom-filter.js</a>, <a href="partitioned-bloom-filter.js.html#line118">line 118</a>
+        <a href="partitioned-bloom-filter.js.html">partitioned-bloom-filter.js</a>, <a href="partitioned-bloom-filter.js.html#line137">line 137</a>
     </li></ul></dd>
     
 
@@ -806,7 +970,7 @@ console.log(filter.has('bar')); // output: false</code></pre>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="partitioned-bloom-filter.js.html">partitioned-bloom-filter.js</a>, <a href="partitioned-bloom-filter.js.html#line136">line 136</a>
+        <a href="partitioned-bloom-filter.js.html">partitioned-bloom-filter.js</a>, <a href="partitioned-bloom-filter.js.html#line155">line 155</a>
     </li></ul></dd>
     
 
@@ -861,6 +1025,115 @@ console.log(filter.rate()); // output: something around 0.1</code></pre>
 
 
         
+            
+
+    
+
+    <h4 class="name" id="saveAsJSON"><span class="type-signature"></span>saveAsJSON<span class="signature">()</span><span class="type-signature"> &rarr; {Object}</span></h4>
+
+    
+
+
+
+<div class="description">
+    <p>Save as a JSON object</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+    <dt class="inherited-from">Inherited From:</dt>
+    <dd class="inherited-from"><ul class="dummy"><li>
+        <a href="Exportable.html#saveAsJSON">Exportable#saveAsJSON</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="exportable.js.html">exportable.js</a>, <a href="exportable.js.html#line67">line 67</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>The exported JSON object</p>
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Object</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+        
     
 
     
@@ -882,7 +1155,7 @@ console.log(filter.rate()); // output: something around 0.1</code></pre>
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.3</a> on Fri Mar 24 2017 13:07:24 GMT+0000 (UTC)
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.3</a> on Fri Mar 24 2017 13:29:15 GMT+0000 (UTC)
 </footer>
 
 <script> prettyPrint(); </script>
